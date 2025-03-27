@@ -33,7 +33,7 @@ instance1.setData("It's the same"):
 console.log(instance2.getData()); // It's the same
 ```
 
-### Factory pattern
+### Factory Pattern
 
 Provides an interface for creating objects but allows subclasses to alter the type of objects created.
 
@@ -67,7 +67,7 @@ const myCar = VehicleFactory.createVehicle("car");
 console.log(myCar.type); // "Car"
 ```
 
-### Abstract Factory pattern
+### Abstract Factory Pattern
 
 Provides an interface for creating families of related objects without specifying concrete classes.
 
@@ -84,7 +84,7 @@ class Truck {
   }
 }
 
-// Factory for land vehicles
+// Factory
 class LandVehicleFactory {
   static createVehicle(vehicleType) {
     switch (vehicleType) {
@@ -98,7 +98,7 @@ class LandVehicleFactory {
   }
 }
 
-// Factory Provider (Abstract Factory)
+// Abstract Factory
 class VehicleFactory {
   static getFactory(type) {
     switch (type) {
@@ -110,7 +110,6 @@ class VehicleFactory {
   }
 }
 
-// Usage
 const landFactory = VehicleFactory.getFactory("land");
 const myCar = landFactory.createVehicle("car");
 
@@ -173,5 +172,41 @@ console.log(vehiclePrototype.getType()); // "Vehicle"
 ```
 
 ## Structural Patterns
+
+### Adapter Pattern (Wrapper)
+
+Allows two incompatible interfaces to work together by providing a wrapper that converts one interface into another.
+
+```js
+class OldSystem {
+  request() {
+    return "Data from old system";
+  }
+}
+
+class NewSystem {
+  specificRequest() {
+    return "Data from new system";
+  }
+}
+
+class Adapter {
+  constructor(newSystem) {
+    this.newSystem = newSystem;
+  }
+
+  request() {
+    return this.newSystem.specificRequest();
+  }
+}
+
+const oldSystem = new OldSystem();
+const newSystem = new NewSystem();
+const adapter = new Adapter(newSystem);
+
+// work the same
+console.log(oldSystem.request());
+console.log(adapter.request());
+```
 
 ## Behavioral Patterns
