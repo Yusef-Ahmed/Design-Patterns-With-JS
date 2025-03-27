@@ -1,2 +1,171 @@
-# Design-Patterns-With-JS
-Design patterns with JS
+# Design Patterns With JS
+
+## Creational Patterns
+
+### Singleton pattern
+
+Ensures that a class has only one instance and provides a global point of access to it.
+
+```js
+class Singleton {
+  constructor() {
+    if (!Singleton.instance) {
+      Singleton.instance = this;
+    }
+    return Singleton.instance;
+  }
+
+  getData() {
+    return "I am a Singleton instance!";
+  }
+}
+
+const instance1 = new Singleton();
+const instance2 = new Singleton();
+
+console.log(instance1 === instance2); // true
+console.log(instance1.getData()); // I am a Singleton instance!
+
+```
+
+### Factory pattern
+
+Provides an interface for creating objects but allows subclasses to alter the type of objects created.
+
+```js
+class Car {
+  constructor() {
+    this.type = "Car";
+  }
+}
+
+class Truck {
+  constructor() {
+    this.type = "Truck";
+  }
+}
+
+class VehicleFactory {
+  static createVehicle(vehicleType) {
+    switch (vehicleType) {
+      case "car":
+        return new Car();
+      case "truck":
+        return new Truck();
+      default:
+        throw new Error("Unknown vehicle type");
+    }
+  }
+}
+
+const myCar = VehicleFactory.createVehicle("car");
+console.log(myCar.type); // "Car"
+```
+
+### Abstract Factory pattern
+
+Provides an interface for creating families of related objects without specifying concrete classes.
+
+```js
+class Car {
+  create() {
+    return "Car created";
+  }
+}
+
+class Truck {
+  create() {
+    return "Truck created";
+  }
+}
+
+// Factory for land vehicles
+class LandVehicleFactory {
+  static createVehicle(vehicleType) {
+    switch (vehicleType) {
+      case "car":
+        return new Car();
+      case "truck":
+        return new Truck();
+      default:
+        throw new Error("Unknown land vehicle type");
+    }
+  }
+}
+
+// Factory Provider (Abstract Factory)
+class VehicleFactory {
+  static getFactory(type) {
+    switch (type) {
+      case "land":
+        return LandVehicleFactory;
+      default:
+        throw new Error("Unknown factory type");
+    }
+  }
+}
+
+// Usage
+const landFactory = VehicleFactory.getFactory("land");
+const myCar = landFactory.createVehicle("car");
+
+console.log(myCar.create()); // "Car created"
+```
+
+### Builder Pattern
+
+Separates object construction from its representation.
+
+```js
+class Car {
+  constructor() {
+    this.engine = null;
+    this.wheels = null;
+  }
+}
+
+class CarBuilder {
+  constructor() {
+    this.car = new Car();
+  }
+
+  addEngine(engine) {
+    this.car.engine = engine;
+    return this;
+  }
+
+  addWheels(wheels) {
+    this.car.wheels = wheels;
+    return this;
+  }
+
+  build() {
+    return this.car;
+  }
+}
+
+const car = new CarBuilder().addEngine("V8").addWheels(4).build();
+console.log(car); // { engine: 'V8', wheels: 4 }
+```
+
+### Prototype Pattern
+
+Creates objects based on a template of an existing object.
+
+```js
+const vehiclePrototype = {
+  type: "Vehicle",
+  getType() {
+    return this.type;
+  }
+};
+
+const car = Object.create(vehiclePrototype);
+car.type = "Car";
+
+console.log(car.getType()); // "Car"
+```
+
+## Structural Patterns
+
+## Behavioral Patterns
