@@ -2,7 +2,7 @@
 
 ## Creational Patterns
 
-### Singleton pattern
+### Singleton Pattern
 
 Ensures that a class has only one instance and provides a global point of access to it.
 
@@ -12,20 +12,25 @@ class Singleton {
     if (!Singleton.instance) {
       Singleton.instance = this;
     }
+    this.name = "I am a Singleton instance!";
     return Singleton.instance;
   }
 
   getData() {
-    return "I am a Singleton instance!";
+    return this.name;
+  }
+
+  setData(newName) {
+    this.name = newName;
   }
 }
 
 const instance1 = new Singleton();
 const instance2 = new Singleton();
 
-console.log(instance1 === instance2); // true
-console.log(instance1.getData()); // I am a Singleton instance!
+instance1.setData("It's the same"):
 
+console.log(instance2.getData()); // It's the same
 ```
 
 ### Factory pattern
@@ -164,6 +169,7 @@ const car = Object.create(vehiclePrototype);
 car.type = "Car";
 
 console.log(car.getType()); // "Car"
+console.log(vehiclePrototype.getType()); // "Vehicle"
 ```
 
 ## Structural Patterns
