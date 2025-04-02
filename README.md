@@ -157,7 +157,7 @@ console.log(myCar.create()); // "Car created"
 
 - Can lead to an explosion of factory classes if not managed well.
 
-### **4- Builder Pattern**
+### **4- Builder Pattern** *[compare with bridge](#2--Bridge-Pattern)*
 
 #### Description
 
@@ -241,9 +241,15 @@ console.log(vehiclePrototype.getType()); // "Vehicle"
 
 ## Structural Patterns
 
-### Adapter Pattern (Wrapper)
+Focus on composing objects and classes to form larger structures while keeping them flexible and efficient.
+
+### **1- Adapter Pattern (Wrapper)**
+
+#### Description
 
 Allows two incompatible interfaces to work together by providing a wrapper that converts one interface into another.
+
+#### Code
 
 ```js
 class OldSystem {
@@ -277,6 +283,63 @@ console.log(oldSystem.request());
 console.log(adapter.request());
 ```
 
-### Bridge Pattern
+#### Pros
 
-## Behavioral Patterns
+- Enables legacy code to work with modern systems.
+- Helps integrate third-party libraries with incompatible APIs.
+
+#### Cons
+
+- Can introduce additional complexity.
+
+### **2- Bridge Pattern** *[compare with builder](#4--Builder-Pattern)*
+
+#### Description 
+
+Separates abstraction from implementation, allowing them to evolve independently.
+
+#### Code
+
+```js
+// Abstraction
+class Remote {
+  constructor(device) {
+    this.device = device;
+  }
+
+  pressPower() {
+    return this.device.turnOn();
+  }
+}
+
+// Implementation
+class TV {
+  turnOn() {
+    return 'TV is ON';
+  }
+}
+
+class Radio {
+  turnOn() {
+    return 'Radio is ON';
+  }
+}
+
+// Using the bridge
+const tvRemote = new Remote(new TV());
+console.log(tvRemote.pressPower()); // TV is ON
+
+const radioRemote = new Remote(new Radio());
+console.log(radioRemote.pressPower()); // Radio is ON
+```
+
+#### Pros
+
+- Increases flexibility by decoupling abstraction from implementation.
+- Makes code easier to extend and modify.
+
+#### Cons
+
+- May add complexity if not needed.
+
+<!-- ## Behavioral Patterns -->
