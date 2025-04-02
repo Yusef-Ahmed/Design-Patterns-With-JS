@@ -157,9 +157,9 @@ console.log(myCar.create()); // "Car created"
 
 - Can lead to an explosion of factory classes if not managed well.
 
-### **4- Builder Pattern** *[compare with bridge](#2--Bridge-Pattern)*
+### **4- Builder Pattern**
 
-#### Description
+#### Description *[compare with bridge](#2--Bridge-Pattern)*
 
 Separates object construction from its representation.
 
@@ -292,9 +292,9 @@ console.log(adapter.request());
 
 - Can introduce additional complexity.
 
-### **2- Bridge Pattern** *[compare with builder](#4--Builder-Pattern)*
+### **2- Bridge Pattern**
 
-#### Description 
+#### Description *[compare with builder](#4--Builder-Pattern)*
 
 Separates abstraction from implementation, allowing them to evolve independently.
 
