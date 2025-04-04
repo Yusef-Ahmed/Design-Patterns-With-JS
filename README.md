@@ -395,5 +395,42 @@ folder.display();
 
 - Can make debugging more difficult due to nested structures.
 
+### **4- Decorator Pattern**
+
+#### Description
+
+Adds functionality dynamically without modifying the original object.
+
+#### Code
+
+```js
+class Coffee {
+  cost() {
+    return 5;
+  }
+}
+
+class MilkDecorator {
+  constructor(coffee) {
+    this.coffee = coffee;
+  }
+  cost() {
+    return this.coffee.cost() + 2;
+  }
+}
+
+const basicCoffee = new Coffee();
+const milkCoffee = new MilkDecorator(basicCoffee);
+console.log(milkCoffee.cost()); // 7
+```
+
+#### Pros
+
+- Allows extending functionality dynamically.
+- Avoids modifying the original class.
+
+#### Cons
+
+- Can result in many small decorator classes, increasing complexity.
 
 <!-- ## Behavioral Patterns -->
