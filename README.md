@@ -477,4 +477,47 @@ console.log(computer.start()); // CPU started, Memory loaded
 
 - Can hide necessary details, making debugging harder.
 
+### **6- Flyweight Pattern**
+
+#### Description
+
+Reduces memory usage by sharing objects instead of creating new ones.
+
+#### Code
+
+```js
+class Car {
+  constructor(model) {
+    this.model = model;
+  }
+}
+
+class CarFactory {
+  constructor() {
+    this.cars = {};
+  }
+  getCar(model) {
+    if (!this.cars[model]) {
+      this.cars[model] = new Car(model);
+    }
+    return this.cars[model];
+  }
+}
+
+const factory = new CarFactory();
+const car1 = factory.getCar('Tesla');
+const car2 = factory.getCar('Tesla');
+console.log(car1 === car2); // true (same shared instance)
+```
+
+#### Pros
+
+- Saves memory by sharing common objects.
+- Improves performance for large-scale applications.
+
+#### Cons
+
+- Increased complexity in managing shared objects.
+
+
 <!-- ## Behavioral Patterns -->
