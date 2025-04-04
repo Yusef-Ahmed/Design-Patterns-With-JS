@@ -433,4 +433,48 @@ console.log(milkCoffee.cost()); // 7
 
 - Can result in many small decorator classes, increasing complexity.
 
+### **5- Facade Pattern**
+
+#### Description
+
+Provides a simplified interface to a complex system.
+
+#### Code
+
+```js
+class CPU {
+  start() {
+    return 'CPU started';
+  }
+}
+
+class Memory {
+  load() {
+    return 'Memory loaded';
+  }
+}
+
+class ComputerFacade {
+  constructor() {
+    this.cpu = new CPU();
+    this.memory = new Memory();
+  }
+  start() {
+    return `${this.cpu.start()}, ${this.memory.load()}`;
+  }
+}
+
+const computer = new ComputerFacade();
+console.log(computer.start()); // CPU started, Memory loaded
+```
+
+#### Pros
+
+- Simplifies interactions with complex subsystems.
+- Reduces dependencies on internal system details.
+
+#### Cons
+
+- Can hide necessary details, making debugging harder.
+
 <!-- ## Behavioral Patterns -->
