@@ -519,5 +519,41 @@ console.log(car1 === car2); // true (same shared instance)
 
 - Increased complexity in managing shared objects.
 
+### **7- Proxy Pattern**
+
+#### Description
+
+Controls access to an object, adding an extra layer of functionality.
+
+#### Code
+
+```js
+class BankAccount {
+  constructor(balance) {
+    this.balance = balance;
+  }
+  withdraw(amount) {
+    if (amount <= this.balance) {
+      this.balance -= amount;
+      return `Withdrawn: $${amount}`;
+    }
+    return 'Insufficient funds';
+  }
+}
+
+class BankProxy {
+  constructor(account) {
+    this.account = account;
+  }
+  withdraw(amount) {
+    console.log(`Attempting to withdraw $${amount}...`);
+    return this.account.withdraw(amount);
+  }
+}
+
+const account = new BankAccount(100);
+const proxy = new BankProxy(account);
+console.log(proxy.withdraw(50)); // Attempting to withdraw $50... Withdrawn: $50
+```
 
 <!-- ## Behavioral Patterns -->
