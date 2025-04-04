@@ -342,4 +342,58 @@ console.log(radioRemote.pressPower()); // Radio is ON
 
 - May add complexity if not needed.
 
+### **3- Composite Pattern**
+
+#### Description
+
+Treats individual objects and compositions of objects uniformly.
+
+#### Code
+
+```js
+class File {
+  constructor(name) {
+    this.name = name;
+  }
+
+  display() {
+    console.log(this.name);
+  }
+}
+
+class Folder {
+  constructor(name) {
+    this.name = name;
+    this.children = [];
+  }
+
+  add(item) {
+    this.children.push(item);
+  }
+
+  display() {
+    console.log(this.name);
+    this.children.forEach(child => child.display());
+  }
+}
+
+const file1 = new File('file1.txt');
+const file2 = new File('file2.txt');
+const folder = new Folder('Documents');
+
+folder.add(file1);
+folder.add(file2);
+folder.display();
+```
+
+#### Pros
+
+- Simplifies complex hierarchical structures.
+- Makes it easy to treat individual and composite objects uniformly.
+
+#### Cons
+
+- Can make debugging more difficult due to nested structures.
+
+
 <!-- ## Behavioral Patterns -->
