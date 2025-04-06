@@ -626,3 +626,188 @@ console.log(auth.handle({ user: 'admin', action: 'delete' }));
 #### Cons
 
 - Harder to debug with many links in the chain.
+
+### **2- Command Pattern**
+
+#### Description
+
+Encapsulates a request as an object.
+
+#### Code
+
+```js
+class Light {
+  turnOn() {
+    return 'Light is on';
+  }
+}
+
+class TurnOnCommand {
+  constructor(light) {
+    this.light = light;
+  }
+  execute() {
+    return this.light.turnOn();
+  }
+}
+
+const light = new Light();
+const command = new TurnOnCommand(light);
+console.log(command.execute());
+```
+
+#### Pros
+
+- Enables undo/redo and queuing.
+- Fully decouples invoker from receiver.
+
+#### Cons
+
+- Introduces many small classes.
+
+### **3- Interpreter Pattern**
+
+Evaluates language grammar or expressions.
+
+#### Code
+
+```js
+class NumberExpression {
+  constructor(value) {
+    this.value = value;
+  }
+  interpret() {
+    return this.value;
+  }
+}
+
+class AddExpression {
+  constructor(left, right) {
+    this.left = left;
+    this.right = right;
+  }
+  interpret() {
+    return this.left.interpret() + this.right.interpret();
+  }
+}
+
+const expr = new AddExpression(new NumberExpression(5), new NumberExpression(3));
+console.log(expr.interpret()); // 8
+```
+
+#### Pros
+
+- Easy to extend grammar.
+- Good for DSLs or config rules.
+
+#### Cons
+
+- Can get complex for large grammars.
+
+### **4- Iterator Pattern**
+
+Provides a way to access elements of a collection without exposing its structure.
+
+#### Code
+
+```js
+class Iterator {
+  constructor(items) {
+    this.items = items;
+    this.index = 0;
+  }
+  next() {
+    return this.index < this.items.length
+      ? { value: this.items[this.index++], done: false }
+      : { done: true };
+  }
+}
+
+const iter = new Iterator(['a', 'b', 'c']);
+console.log(iter.next()); // { value: 'a', done: false }
+```
+
+#### Pros
+
+- Uniform way to traverse collections.
+- Encapsulates iteration logic.
+
+### **5- Mediator Pattern**
+
+Centralizes communication between components.
+
+#### Code
+
+```js
+class ChatRoom {
+  showMessage(user, message) {
+    console.log(`${user}: ${message}`);
+  }
+}
+
+class User {
+  constructor(name, chatroom) {
+    this.name = name;
+    this.chatroom = chatroom;
+  }
+  send(message) {
+    this.chatroom.showMessage(this.name, message);
+  }
+}
+
+const room = new ChatRoom();
+const alice = new User('Alice', room);
+alice.send('Hello!');
+```
+
+#### Pros
+
+- Reduces direct dependencies between components.
+
+#### Cons
+
+- Mediator can become a complex object.
+
+### **6- Memento Pattern**
+
+Captures and restores an object's internal state.
+
+#### Code
+
+```js
+class Editor {
+  constructor() {
+    this.content = '';
+  }
+  setContent(content) {
+    this.content = content;
+  }
+  save() {
+    return new Memento(this.content);
+  }
+  restore(memento) {
+    this.content = memento.getContent();
+  }
+}
+
+class Memento {
+  constructor(content) {
+    this.content = content;
+  }
+  getContent() {
+    return this.content;
+  }
+}
+
+const editor = new Editor();
+editor.setContent('v1');
+const saved = editor.save();
+editor.setContent('v2');
+editor.restore(saved);
+console.log(editor.content); // v1
+```
+
+#### Pros
+
+- Allows undo/redo without violating encapsulation.
+
