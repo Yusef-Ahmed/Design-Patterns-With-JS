@@ -18,6 +18,20 @@
 - [6. Flyweight Pattern](#6--flyweight-pattern)
 - [7. Proxy Pattern](#7--proxy-pattern)
 
+### Behavioral Patterns
+- [1. Chain of Responsibility](#1--chain-of-responsibility)
+- [2. Command Pattern](#2--command-pattern)
+- [3. Interpreter Pattern](#3--interpreter-pattern)
+- [4. Iterator Pattern](#4--iterator-pattern)
+- [5. Mediator Pattern](#5--mediator-pattern)
+- [6. Memento Pattern](#6--memento-pattern)
+- [7. Observer Pattern](#7--observer-pattern)
+- [8. State Pattern](#8--state-pattern)
+- [9. Strategy Pattern](#9--strategy-pattern)
+- [10. Template Pattern](#10--template-pattern)
+- [11. Visitor Pattern](#11--visitor-pattern)
+
+
 ## **Creational Patterns**
 
 Creational design patterns provide various object creation mechanisms, which increase flexibility and reuse of existing code.
@@ -226,7 +240,7 @@ console.log(car); // { engine: 'V8', wheels: 4 }
 
 ### **5- Prototype Pattern**
 
-#### Description
+#### Description *[compare with Template](#10--Template-Pattern)*
 
 Creates objects based on a template of an existing object.
 
@@ -667,6 +681,8 @@ console.log(command.execute());
 
 ### **3- Interpreter Pattern**
 
+#### Description
+
 Evaluates language grammar or expressions.
 
 #### Code
@@ -706,6 +722,8 @@ console.log(expr.interpret()); // 8
 
 ### **4- Iterator Pattern**
 
+#### Description
+
 Provides a way to access elements of a collection without exposing its structure.
 
 #### Code
@@ -733,6 +751,8 @@ console.log(iter.next()); // { value: 'a', done: false }
 - Encapsulates iteration logic.
 
 ### **5- Mediator Pattern**
+
+#### Description
 
 Centralizes communication between components.
 
@@ -769,6 +789,8 @@ alice.send('Hello!');
 - Mediator can become a complex object.
 
 ### **6- Memento Pattern**
+
+#### Description
 
 Captures and restores an object's internal state.
 
@@ -811,3 +833,198 @@ console.log(editor.content); // v1
 
 - Allows undo/redo without violating encapsulation.
 
+### **7- Observer Pattern**
+
+#### Description
+
+Notifies multiple objects about changes to another object.
+
+#### Code
+
+```js
+class Subject {
+  constructor() {
+    this.observers = [];
+  }
+  subscribe(fn) {
+    this.observers.push(fn);
+  }
+  notify(data) {
+    this.observers.forEach(fn => fn(data));
+  }
+}
+
+const subject = new Subject();
+subject.subscribe(data => console.log('First Received:', data));
+subject.subscribe(data => console.log('Second Received:', data));
+subject.subscribe(data => console.log('Third Received:', data));
+subject.notify('Hello!');
+```
+
+#### Pros
+
+- Promotes decoupling between emitter and subscribers.
+- Great for real-time features.
+
+### **8- State Pattern**
+
+#### Description
+
+Lets an object alter its behavior when its internal state changes.
+
+#### Code
+
+```js
+class TrafficLight {
+  setState(state) {
+    this.state = state;
+  }
+  change() {
+    return this.state.handle();
+  }
+}
+
+class RedState {
+  handle() {
+    return 'Stop';
+  }
+}
+
+class GreenState {
+  handle() {
+    return 'Go';
+  }
+}
+
+const light = new TrafficLight();
+light.setState(new GreenState());
+console.log(light.change()); // Go
+light.setState(new RedState());
+console.log(light.change()); // Stop
+```
+
+#### Pros
+
+- Organizes behavior by state.
+- Avoids huge switch-case logic.
+
+### **9- Strategy Pattern**
+
+#### Description
+
+Enables selecting an algorithm at runtime.
+
+#### Code
+
+```js
+class Context {
+  setStrategy(strategy) {
+    this.strategy = strategy;
+  }
+  execute(a, b) {
+    return this.strategy.calculate(a, b);
+  }
+}
+
+class AddStrategy {
+  calculate(a, b) {
+    return a + b;
+  }
+}
+
+class MultiplyStrategy {
+  calculate(a, b) {
+    return a * b;
+  }
+}
+
+const context = new Context();
+context.setStrategy(new AddStrategy());
+console.log(context.execute(2, 3)); // 5
+```
+
+#### Pros
+
+- Easy to switch between algorithms.
+- Avoids hardcoded logic.
+
+### **10- Template Pattern**
+
+#### Description *[compare with Prototype](#5--Prototype-Pattern)*
+
+Defines the skeleton of an algorithm but lets subclasses change parts.
+
+#### Code
+
+```js
+class Meal {
+  prepare() {
+    this.getIngredients();
+    this.cook();
+    this.serve();
+  }
+  getIngredients() {}
+  cook() {}
+  serve() {
+    console.log('Serving...');
+  }
+}
+
+class Pasta extends Meal {
+  getIngredients() {
+    console.log('Getting pasta and sauce');
+  }
+  cook() {
+    console.log('Cooking pasta');
+  }
+}
+
+const dinner = new Pasta();
+dinner.prepare();
+```
+
+#### Pros
+
+- Promotes code reuse.
+- Helps enforce a process flow.
+
+### **11- Visitor Pattern**
+
+#### Description
+
+Lets you add operations to objects without changing their classes.
+
+#### Code
+
+```js
+class Animal {
+  accept(visitor) {
+    visitor.visit(this);
+  }
+}
+
+class Dog extends Animal {
+  bark() {
+    return 'Woof!';
+  }
+}
+
+class SoundVisitor {
+  visit(animal) {
+    if (animal instanceof Dog) {
+      console.log(animal.bark());
+    }
+  }
+}
+
+const dog = new Dog();
+dog.accept(new SoundVisitor());
+```
+
+#### Pros
+
+- Adds functionality to object structure without modifying it.
+
+#### Cons
+
+- Can make object structure rigid.
