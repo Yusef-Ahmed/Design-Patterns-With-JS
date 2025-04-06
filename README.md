@@ -1,5 +1,23 @@
 # **Design Patterns With JS**
 
+## Table of Contents
+
+### Creational Patterns
+- [1. Singleton Pattern](#1--singleton-pattern)
+- [2. Factory Pattern](#2--factory-pattern)
+- [3. Abstract Factory Pattern](#3--abstract-factory-pattern)
+- [4. Builder Pattern](#4--builder-pattern)
+- [5. Prototype Pattern](#5--prototype-pattern)
+
+### Structural Patterns
+- [1. Adapter Pattern](#1--adapter-pattern-wrapper)
+- [2. Bridge Pattern](#2--bridge-pattern)
+- [3. Composite Pattern](#3--composite-pattern)
+- [4. Decorator Pattern](#4--decorator-pattern)
+- [5. Facade Pattern](#5--facade-pattern)
+- [6. Flyweight Pattern](#6--flyweight-pattern)
+- [7. Proxy Pattern](#7--proxy-pattern)
+
 ## **Creational Patterns**
 
 Creational design patterns provide various object creation mechanisms, which increase flexibility and reuse of existing code.
@@ -556,4 +574,5 @@ const proxy = new BankProxy(account);
 console.log(proxy.withdraw(50)); // Attempting to withdraw $50... Withdrawn: $50
 ```
 
-<!-- ## Behavioral Patterns -->
+## Behavioral Patterns
+
