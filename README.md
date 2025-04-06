@@ -576,3 +576,53 @@ console.log(proxy.withdraw(50)); // Attempting to withdraw $50... Withdrawn: $50
 
 ## Behavioral Patterns
 
+### **1- Chain of Responsibility**
+
+#### Description
+
+Passes a request along a chain of handlers until one handles it.
+
+#### Code
+
+```js
+class Handler {
+  setNext(handler) {
+    this.next = handler;
+    return handler;
+  }
+  handle(request) {
+    if (this.next) return this.next.handle(request);
+    return "Chain is over";
+  }
+}
+
+class AuthHandler extends Handler {
+  handle(request) {
+    if (!request.user) return 'Unauthorized';
+    console.log("user is:", request.user);
+    return super.handle(request);
+  }
+}
+
+class LogHandler extends Handler {
+  handle(request) {
+    console.log('action:', request.action);
+    return super.handle(request);
+  }
+}
+
+const auth = new AuthHandler();
+const logger = new LogHandler();
+auth.setNext(logger);
+
+console.log(auth.handle({ user: 'admin', action: 'delete' }));
+```
+
+#### Pros
+
+- Decouples sender and handler logic.
+- Easy to add/modify handlers.
+
+#### Cons
+
+- Harder to debug with many links in the chain.
