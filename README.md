@@ -3,6 +3,7 @@
 ## Table of Contents
 
 ### Creational Patterns
+
 - [1. Singleton Pattern](#1--singleton-pattern)
 - [2. Factory Pattern](#2--factory-pattern)
 - [3. Abstract Factory Pattern](#3--abstract-factory-pattern)
@@ -10,6 +11,7 @@
 - [5. Prototype Pattern](#5--prototype-pattern)
 
 ### Structural Patterns
+
 - [1. Adapter Pattern](#1--adapter-pattern-wrapper)
 - [2. Bridge Pattern](#2--bridge-pattern)
 - [3. Composite Pattern](#3--composite-pattern)
@@ -19,6 +21,7 @@
 - [7. Proxy Pattern](#7--proxy-pattern)
 
 ### Behavioral Patterns
+
 - [1. Chain of Responsibility](#1--chain-of-responsibility)
 - [2. Command Pattern](#2--command-pattern)
 - [3. Interpreter Pattern](#3--interpreter-pattern)
@@ -30,7 +33,6 @@
 - [9. Strategy Pattern](#9--strategy-pattern)
 - [10. Template Pattern](#10--template-pattern)
 - [11. Visitor Pattern](#11--visitor-pattern)
-
 
 ## **Creational Patterns**
 
@@ -118,6 +120,7 @@ class VehicleFactory {
 const myCar = VehicleFactory.createVehicle("car");
 console.log(myCar.type); // "Car"
 ```
+
 #### Pros
 
 - Simplifies object creation.
@@ -191,7 +194,7 @@ console.log(myCar.create()); // "Car created"
 
 ### **4- Builder Pattern**
 
-#### Description *[compare with bridge](#2--Bridge-Pattern)*
+#### Description _[compare with bridge](#2--Bridge-Pattern)_
 
 Separates object construction from its representation.
 
@@ -240,7 +243,7 @@ console.log(car); // { engine: 'V8', wheels: 4 }
 
 ### **5- Prototype Pattern**
 
-#### Description *[compare with Template](#10--Template-Pattern)*
+#### Description _[compare with Template](#10--Template-Pattern)_
 
 Creates objects based on a template of an existing object.
 
@@ -251,7 +254,7 @@ const vehiclePrototype = {
   type: "Vehicle",
   getType() {
     return this.type;
-  }
+  },
 };
 
 const car = Object.create(vehiclePrototype);
@@ -326,7 +329,7 @@ console.log(adapter.request());
 
 ### **2- Bridge Pattern**
 
-#### Description *[compare with builder](#4--Builder-Pattern)*
+#### Description _[compare with builder](#4--Builder-Pattern)_
 
 Separates abstraction from implementation, allowing them to evolve independently.
 
@@ -347,13 +350,13 @@ class Remote {
 // Implementation
 class TV {
   turnOn() {
-    return 'TV is ON';
+    return "TV is ON";
   }
 }
 
 class Radio {
   turnOn() {
-    return 'Radio is ON';
+    return "Radio is ON";
   }
 }
 
@@ -405,13 +408,13 @@ class Folder {
 
   display() {
     console.log(this.name);
-    this.children.forEach(child => child.display());
+    this.children.forEach((child) => child.display());
   }
 }
 
-const file1 = new File('file1.txt');
-const file2 = new File('file2.txt');
-const folder = new Folder('Documents');
+const file1 = new File("file1.txt");
+const file2 = new File("file2.txt");
+const folder = new Folder("Documents");
 
 folder.add(file1);
 folder.add(file2);
@@ -476,13 +479,13 @@ Provides a simplified interface to a complex system.
 ```js
 class CPU {
   start() {
-    return 'CPU started';
+    return "CPU started";
   }
 }
 
 class Memory {
   load() {
-    return 'Memory loaded';
+    return "Memory loaded";
   }
 }
 
@@ -537,8 +540,8 @@ class CarFactory {
 }
 
 const factory = new CarFactory();
-const car1 = factory.getCar('Tesla');
-const car2 = factory.getCar('Tesla');
+const car1 = factory.getCar("Tesla");
+const car2 = factory.getCar("Tesla");
 console.log(car1 === car2); // true (same shared instance)
 ```
 
@@ -569,7 +572,7 @@ class BankAccount {
       this.balance -= amount;
       return `Withdrawn: $${amount}`;
     }
-    return 'Insufficient funds';
+    return "Insufficient funds";
   }
 }
 
@@ -589,6 +592,8 @@ console.log(proxy.withdraw(50)); // Attempting to withdraw $50... Withdrawn: $50
 ```
 
 ## Behavioral Patterns
+
+How objects interact and communicate, they help manage responsibilities between objects, making the system more flexible and easier to maintain.
 
 ### **1- Chain of Responsibility**
 
@@ -612,7 +617,7 @@ class Handler {
 
 class AuthHandler extends Handler {
   handle(request) {
-    if (!request.user) return 'Unauthorized';
+    if (!request.user) return "Unauthorized";
     console.log("user is:", request.user);
     return super.handle(request);
   }
@@ -620,7 +625,7 @@ class AuthHandler extends Handler {
 
 class LogHandler extends Handler {
   handle(request) {
-    console.log('action:', request.action);
+    console.log("action:", request.action);
     return super.handle(request);
   }
 }
@@ -629,7 +634,7 @@ const auth = new AuthHandler();
 const logger = new LogHandler();
 auth.setNext(logger);
 
-console.log(auth.handle({ user: 'admin', action: 'delete' }));
+console.log(auth.handle({ user: "admin", action: "delete" }));
 ```
 
 #### Pros
@@ -652,7 +657,7 @@ Encapsulates a request as an object.
 ```js
 class Light {
   turnOn() {
-    return 'Light is on';
+    return "Light is on";
   }
 }
 
@@ -707,7 +712,10 @@ class AddExpression {
   }
 }
 
-const expr = new AddExpression(new NumberExpression(5), new NumberExpression(3));
+const expr = new AddExpression(
+  new NumberExpression(5),
+  new NumberExpression(3)
+);
 console.log(expr.interpret()); // 8
 ```
 
@@ -741,7 +749,7 @@ class Iterator {
   }
 }
 
-const iter = new Iterator(['a', 'b', 'c']);
+const iter = new Iterator(["a", "b", "c"]);
 console.log(iter.next()); // { value: 'a', done: false }
 ```
 
@@ -776,8 +784,8 @@ class User {
 }
 
 const room = new ChatRoom();
-const alice = new User('Alice', room);
-alice.send('Hello!');
+const alice = new User("Alice", room);
+alice.send("Hello!");
 ```
 
 #### Pros
@@ -799,7 +807,7 @@ Captures and restores an object's internal state.
 ```js
 class Editor {
   constructor() {
-    this.content = '';
+    this.content = "";
   }
   setContent(content) {
     this.content = content;
@@ -822,9 +830,9 @@ class Memento {
 }
 
 const editor = new Editor();
-editor.setContent('v1');
+editor.setContent("v1");
 const saved = editor.save();
-editor.setContent('v2');
+editor.setContent("v2");
 editor.restore(saved);
 console.log(editor.content); // v1
 ```
@@ -850,15 +858,15 @@ class Subject {
     this.observers.push(fn);
   }
   notify(data) {
-    this.observers.forEach(fn => fn(data));
+    this.observers.forEach((fn) => fn(data));
   }
 }
 
 const subject = new Subject();
-subject.subscribe(data => console.log('First Received:', data));
-subject.subscribe(data => console.log('Second Received:', data));
-subject.subscribe(data => console.log('Third Received:', data));
-subject.notify('Hello!');
+subject.subscribe((data) => console.log("First Received:", data));
+subject.subscribe((data) => console.log("Second Received:", data));
+subject.subscribe((data) => console.log("Third Received:", data));
+subject.notify("Hello!");
 ```
 
 #### Pros
@@ -886,13 +894,13 @@ class TrafficLight {
 
 class RedState {
   handle() {
-    return 'Stop';
+    return "Stop";
   }
 }
 
 class GreenState {
   handle() {
-    return 'Go';
+    return "Go";
   }
 }
 
@@ -950,7 +958,7 @@ console.log(context.execute(2, 3)); // 5
 
 ### **10- Template Pattern**
 
-#### Description *[compare with Prototype](#5--Prototype-Pattern)*
+#### Description _[compare with Prototype](#5--Prototype-Pattern)_
 
 Defines the skeleton of an algorithm but lets subclasses change parts.
 
@@ -966,16 +974,16 @@ class Meal {
   getIngredients() {}
   cook() {}
   serve() {
-    console.log('Serving...');
+    console.log("Serving...");
   }
 }
 
 class Pasta extends Meal {
   getIngredients() {
-    console.log('Getting pasta and sauce');
+    console.log("Getting pasta and sauce");
   }
   cook() {
-    console.log('Cooking pasta');
+    console.log("Cooking pasta");
   }
 }
 
@@ -1005,7 +1013,7 @@ class Animal {
 
 class Dog extends Animal {
   bark() {
-    return 'Woof!';
+    return "Woof!";
   }
 }
 
